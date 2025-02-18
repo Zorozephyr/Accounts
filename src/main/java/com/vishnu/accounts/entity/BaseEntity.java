@@ -10,8 +10,6 @@ import lombok.ToString;
 import java.time.LocalDateTime;
 
 @MappedSuperclass
-@Getter
-@Setter
 @ToString
 public class BaseEntity {
 
@@ -23,4 +21,36 @@ public class BaseEntity {
     private LocalDateTime updateAt;
     @Column(insertable = false)
     private String updatedBy;
+
+    public LocalDateTime getCreatedAt() {
+        return createdAt;
+    }
+
+    public void setCreatedAt(LocalDateTime createdAt) {
+        this.createdAt = createdAt;
+    }
+
+    public String getCreatedBy() {
+        return createdBy;
+    }
+
+    public void setCreatedBy(String createdBy) {
+        this.createdBy = createdBy;
+    }
+
+    public LocalDateTime getUpdateAt() {
+        return updateAt;
+    }
+
+    public void setUpdateAt(LocalDateTime updateAt) {
+        this.updateAt = updateAt;
+    }
+
+    public String getUpdatedBy() {
+        return updatedBy;
+    }
+
+    public void setUpdatedBy(String updatedBy) {
+        this.updatedBy = updatedBy;
+    }
 }
