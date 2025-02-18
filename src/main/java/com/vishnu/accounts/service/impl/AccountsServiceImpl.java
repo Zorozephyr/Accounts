@@ -61,6 +61,30 @@ public class AccountsServiceImpl implements IAccountsService {
             return customerDto;
     }
 
+    /**
+     * @param customerDto
+     * @return boolean indicating if the update of Account details is successful or not
+     */
+    @Override
+    public boolean updateAccount(CustomerDto customerDto) {
+        boolean isUpdated = false;
+        AccountsDto accountsDto = customerDto.getAccountsDto();
+        Accounts accounts = null;
+        if (accountsDto != null) {
+            accounts = accountsRepository.findById(accountsDto.getAccountNumber()).orElseThrow(() -> new ResourceNotFoundException("Account", "AccountNumber", accountsDto.getAccountType()));
+
+            AccountsMapper.mapToAccounts(accountsDto, accounts);
+            accounts = accountsRepository.save(accounts);
+
+            Long customerId = accounts.getCustomerId();
+            Customer customer = customerRepository.findById(customerId).orElseThrow(() -> new ResourceNotFoundException("Customer", "CustomerID", customerId.toString()));
+            CustomerMapper.mapToCustomer(customerDto, customer);
+            customerRepository.save(customer);
+            isUpdated = true;
+        }
+        return isUpdated;
+    }
+
     private Accounts createNewAccount(Customer customer){
         Accounts account = new Accounts();
         account.setCustomerId(customer.getCustomerId());
