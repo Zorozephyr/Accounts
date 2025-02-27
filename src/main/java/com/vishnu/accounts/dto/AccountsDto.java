@@ -1,5 +1,7 @@
 package com.vishnu.accounts.dto;
 
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.Pattern;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -9,8 +11,14 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class AccountsDto {
 
+    @Pattern(regexp = "^\\d{10}$", message = "Account number must be exactly 10 digits")
+    @NotEmpty
     private Long accountNumber;
+
+    @NotEmpty(message = "Account type cannot be empty")
     private String accountType;
+
+    @NotEmpty(message = "BranchAddress cannot be null or empty")
     private String branchAddress;
 
     public long getAccountNumber() {
