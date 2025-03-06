@@ -1,6 +1,10 @@
 server:
   port: 8080
 spring:
+  application:
+    name: "accounts"
+  profiles:
+    active: "prod"
   datasource:
     url: jdbc:h2:mem:testdb
     driverClassName: org.h2.Driver
@@ -14,4 +18,12 @@ spring:
     hibernate:
       ddl-auto: update
     show-sql: true
+  config:
+    import: "optional:configserver:http://localhost:8071/"
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
 
