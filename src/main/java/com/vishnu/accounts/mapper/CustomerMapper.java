@@ -1,5 +1,6 @@
 package com.vishnu.accounts.mapper;
 
+import com.vishnu.accounts.dto.CustomerDetailsDto;
 import com.vishnu.accounts.dto.CustomerDto;
 import com.vishnu.accounts.entity.Customer;
 public class CustomerMapper {
@@ -17,5 +18,14 @@ public class CustomerMapper {
         customer.setMobileNumber(customerDto.getMobileNumber());
         return customer;
     }
+
+    public static CustomerDetailsDto mapToCustomerDetailsDto(Customer customer, CustomerDetailsDto customerDetailsDto) {
+        customerDetailsDto.setName(customer.getName());
+        customerDetailsDto.setEmail(customer.getEmail());
+        customerDetailsDto.setMobileNumber(customer.getMobileNumber());
+        return customerDetailsDto;
+    }
+
+
 
 }
